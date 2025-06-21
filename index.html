@@ -1,620 +1,472 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kode Diri - Decode Diri Lo.</title>
+    <title>PANDU MAHARAJA - Puskesmas Trajeng</title>
+    
+    <!-- FAVICON:
+       1. Siapkan gambar logo Anda dalam format .png atau .ico (ukuran persegi, misal 32x32 pixel).
+       2. Unggah gambar tersebut ke server website Anda.
+       3. Ganti 'https://placehold.co/32x32/8b5cf6/FFFFFF?text=P' di bawah ini dengan path ke file logo Anda, misal 'images/favicon.png'.
+    -->
+    <link rel="icon" type="image/png" href="https://placehold.co/32x32/8b5cf6/FFFFFF?text=P">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.x/dist/typography.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles and animations */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #111827; /* bg-gray-900 */
-            color: #F3F4F6; /* text-gray-200 */
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb; /* Light gray background */
+            color: #1f2937; /* Dark text */
         }
-
-        .font-mono {
-            font-family: 'Roboto Mono', monospace;
+        .light-glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+            transition: all 0.3s ease;
         }
-        
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
+        .light-glass-card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.07), 0 4px 6px -4px rgb(0 0 0 / 0.07);
+            transform: translateY(-5px);
         }
-        
-        /* Page container styles */
+        .primary-button {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+            color: #fff;
+        }
+        .primary-button:hover {
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            transform: scale(1.05);
+        }
+        .section-title {
+            color: #111827; /* Darker title color */
+        }
         .page {
-            display: none; /* Hide all pages by default */
+            display: none; /* All pages are hidden by default */
         }
         .page.active {
-            display: block; /* Show active page */
+            display: block; /* The active page is shown */
         }
-        
-        #main-nav {
-            transition: top 0.3s ease-in-out;
+        /* Typing animation styles */
+        #animated-title::after {
+            content: '_';
+            font-weight: 600;
+            color: #8b5cf6; /* Purple cursor */
+            animation: blink 1.2s step-end infinite;
+        }
+        #animated-title.typing-done::after {
+            animation: none;
+            opacity: 1;
+        }
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        /* Glitch Animation for the logo */
-        .glitch {
-            position: relative;
-            font-family: 'Roboto Mono', monospace;
-            font-weight: 700;
-            animation: glitch-anim 4s steps(1, end) infinite;
-        }
-        
-        .glitch-wrapper {
-            animation: glitch-stabilize 4s steps(1, end) infinite;
-        }
-
-        .glitch:before,
-        .glitch:after {
-            content: attr(data-text);
-            position: absolute;
+        /* Animated Squares Background */
+        .squares {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #111827;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .squares li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(59, 130, 246, 0.15);
+            animation: animate-squares 25s linear infinite;
+            bottom: -150px;
+        }
+        .squares li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .squares li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .squares li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .squares li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; background-color: rgba(139, 92, 246, 0.1); }
+        .squares li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .squares li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background-color: rgba(139, 92, 246, 0.1); }
+        .squares li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
+        .squares li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .squares li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; background-color: rgba(139, 92, 246, 0.1); }
+        .squares li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+
+        @keyframes animate-squares {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; border-radius: 50%; }
+        }
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
-        .glitch:before {
-            left: 2px;
-            text-shadow: -2px 0 #3b82f6; /* blue-500 */
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim-2 3s infinite linear alternate-reverse;
-        }
-
-        .glitch:after {
-            left: -2px;
-            text-shadow: -2px 0 #ec4899, 2px 2px #fde047; /* pink-500, yellow-200 */
-            clip: rect(86px, 450px, 91px, 0);
-            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        /* Active Nav Link Style */
+        .nav-link.active {
+            color: #6d28d9; /* Purple-700 */
+            font-weight: 600;
         }
         
-        @keyframes glitch-stabilize {
-            0% { opacity: 1; }
-            74% { opacity: 1; }
-            75% { opacity: 0; }
-            99% { opacity: 0; }
-            100% { opacity: 1; }
+        /* Animate on Scroll Styles */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
-
-        @keyframes glitch-anim {
-            0% { transform: translate(0); }
-            74% { transform: translate(0); }
-            75% { transform: translate(3px, -4px); }
-            80% { transform: translate(-5px, 2px); }
-            85% { transform: translate(4px, 1px); }
-            90% { transform: translate(-2px, -3px); }
-            95% { transform: translate(3px, 0px); }
-            100% { transform: translate(0); }
-        }
-
-        @keyframes glitch-anim-1 {
-            0% { clip: rect(72px, 9999px, 8px, 0); } 10% { clip: rect(48px, 9999px, 87px, 0); } 20% { clip: rect(41px, 9999px, 42px, 0); } 30% { clip: rect(25px, 9999px, 98px, 0); } 40% { clip: rect(2px, 9999px, 89px, 0); } 50% { clip: rect(61px, 9999px, 12px, 0); } 60% { clip: rect(4px, 9999px, 9px, 0); } 70% { clip: rect(63px, 9999px, 93px, 0); } 80% { clip: rect(81px, 9999px, 66px, 0); } 90% { clip: rect(10px, 9999px, 58px, 0); } 100% { clip: rect(98px, 9999px, 5px, 0); }
-        }
-
-        @keyframes glitch-anim-2 {
-            0% { clip: rect(7px, 9999px, 93px, 0); } 10% { clip: rect(89px, 9999px, 98px, 0); } 20% { clip: rect(5px, 9999px, 16px, 0); } 30% { clip: rect(32px, 9999px, 48px, 0); } 40% { clip: rect(46px, 9999px, 1px, 0); } 50% { clip: rect(48px, 9999px, 78px, 0); } 60% { clip: rect(95px, 9999px, 29px, 0); } 70% { clip: rect(2px, 9999px, 14px, 0); } 80% { clip: rect(27px, 9999px, 54px, 0); } 90% { clip: rect(22px, 9999px, 10px, 0); } 100% { clip: rect(65px, 9999px, 49px, 0); }
-        }
-
-        .feature-card, .article-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .article-card { cursor: pointer; }
-        .feature-card:hover, .article-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 8px 10px -6px rgba(59, 130, 246, 0.2);
-        }
-        
-        .social-btn:hover {
-            transform: scale(1.05);
-            filter: brightness(1.2);
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-50 text-gray-800">
+    <ul class="squares">
+        <li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li>
+    </ul>
 
-    <div id="particles-js"></div>
-    
-    <!-- Navigation Bar -->
-    <nav id="main-nav" class="bg-gray-900/80 backdrop-blur-md p-4 fixed w-full z-50 top-[-100px]">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="#" onclick="showPage('home'); return false;" class="text-xl font-bold font-mono">Kode Diri_</a>
-            <div class="flex gap-6 items-center">
-                <a href="#" onclick="showPage('decode-room'); return false;" class="text-gray-300 hover:text-white">Ruang Dekode</a>
-                <a href="#" onclick="showPage('about'); return false;" class="text-gray-300 hover:text-white">Tentang Kami</a>
-                <a href="#" onclick="showPage('contact'); return false;" class="text-gray-300 hover:text-white">Kontak</a>
+    <div class="content-wrapper">
+        <!-- Sticky Header Container -->
+        <div id="sticky-header-container" class="sticky top-0 z-50">
+            <!-- Top Banner -->
+            <div id="top-banner" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-center p-2 text-sm font-semibold shadow-lg">
+                Halo! Terima kasih telah mengunjungi PANDU MAHARAJA 💙 Platform Cek Kesehatan Mandiri dari Puskesmas Trajeng 🩺🏥
             </div>
-        </div>
-    </nav>
-
-    <!-- Main Content Wrapper -->
-    <div id="content-wrapper">
-
-        <!-- ===== HOME PAGE ===== -->
-        <main id="home" class="page active">
-            <!-- Bagian 1: The Hook -->
-            <header class="min-h-screen flex flex-col items-center justify-center text-center p-6 overflow-hidden">
-                <div class="mb-8">
-                    <div class="glitch-wrapper">
-                        <h1 class="text-4xl md:text-6xl font-black uppercase glitch" data-text="Kode Diri_">Kode Diri_</h1>
-                    </div>
-                </div>
-                <h2 class="text-4xl md:text-6xl font-black text-white max-w-4xl mx-auto leading-tight">
-                    HIDUP PENUH <span class="text-pink-500">'BUG'</span>? SAATNYA <span class="text-blue-500">DECODE</span> DIRI LO.
-                </h2>
-                <p class="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-                    Bukan, lo nggak rusak. Lo cuma butuh manual book.<br>Kode Diri adalah platform kesehatan mental & pengembangan diri yang bantu lo baca pola, kelola rasa, dan upgrade jadi versi terbaik.
-                </p>
-                <div class="mt-10 flex justify-center">
-                    <a href="#problem-section" class="social-btn bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300">
-                        JELAJAHI LEBIH LANJUT
+            <!-- Header / Navbar -->
+            <header class="bg-white/80 backdrop-blur-md border-b border-gray-200">
+                <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                    <a href="#" class="nav-link" data-page="main-page" data-section="hero">
+                        <img src="https://placehold.co/150x40/1f2937/ffffff?text=PANDU+MAHARAJA" alt="Logo PANDU MAHARAJA" class="h-10 w-auto">
                     </a>
+                    <div id="main-nav" class="hidden md:flex space-x-8 items-center text-gray-600">
+                        <a href="#hero" class="nav-link hover:text-blue-500" data-page="main-page" data-section="hero">Home</a>
+                        <a href="#tentang" class="nav-link hover:text-blue-500" data-page="main-page" data-section="tentang">Tentang</a>
+                        <a href="#alur" class="nav-link hover:text-blue-500" data-page="main-page" data-section="alur">Alur</a>
+                        <a href="#jadwal-manfaat" class="nav-link hover:text-blue-500" data-page="main-page" data-section="jadwal-manfaat">Jadwal & Manfaat</a>
+                        <a href="#" class="nav-link hover:text-blue-500" data-page="blog-list-page" data-section="artikel">Artikel</a>
+                        <a href="#galeri" class="nav-link hover:text-blue-500" data-page="main-page" data-section="galeri">Galeri</a>
+                    </div>
+                    <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="hidden md:block text-white font-semibold px-6 py-2 rounded-full primary-button">
+                        Reservasi Online
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    </button>
+                </nav>
+                <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white border-t border-gray-200">
+                     <a href="#hero" class="nav-link block py-2 hover:text-blue-500" data-page="main-page" data-section="hero">Home</a>
+                     <a href="#tentang" class="nav-link block py-2 hover:text-blue-500" data-page="main-page" data-section="tentang">Tentang</a>
+                     <a href="#alur" class="nav-link block py-2 hover:text-blue-500" data-page="main-page" data-section="alur">Alur Pelayanan</a>
+                     <a href="#jadwal-manfaat" class="nav-link block py-2 hover:text-blue-500" data-page="main-page" data-section="jadwal-manfaat">Jadwal & Manfaat</a>
+                     <a href="#" class="nav-link block py-2 hover:text-blue-500" data-page="blog-list-page" data-section="artikel">Artikel</a>
+                     <a href="#galeri" class="nav-link block py-2 hover:text-blue-500" data-page="main-page" data-section="galeri">Galeri</a>
+                     <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="mt-4 block w-full text-center text-white font-semibold px-6 py-2 rounded-full primary-button">Reservasi Online</a>
                 </div>
             </header>
+        </div>
 
-            <!-- Bagian 2: The Problem -->
-            <section id="problem-section" class="py-20 px-6 bg-gray-900/50 backdrop-blur-sm">
-                 <div class="max-w-6xl mx-auto text-center">
-                    <h2 class="text-3xl md:text-5xl font-bold font-mono text-red-500">Error 404: Meaning Not Found?</h2>
-                    <p class="mt-4 text-lg text-gray-400">Lo nggak sendirian kalau ngerasa kayak gini:</p>
-                    <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 text-left">
-                        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-                            <div class="flex items-center gap-4 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.443V21a1 1 0 11-2 0v-2.557a3.374 3.374 0 00-.73-2.154l-.548-.547z" /></svg>
-                                <h3 class="text-xl font-bold text-white">Overthinking</h3>
+        <!-- Main Page Content -->
+        <div id="main-page" class="page active">
+            <main>
+                <!-- Hero Section -->
+                <section id="hero" class="scroll-animate relative text-gray-800 min-h-[calc(80vh-104px)] flex items-center pt-20">
+                    <div class="container mx-auto px-6 text-center z-10">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">Deteksi Dini, Aksi Tepat</h1>
+                        <h2 id="animated-title" class="text-2xl md:text-4xl mt-6 mb-8 font-semibold text-gray-900 min-h-[40px] md:min-h-[48px]"></h2>
+                        <div class="my-8 inline-block">
+                            <div class="light-glass-card p-4 rounded-lg">
+                                <p class="text-lg md:text-xl text-gray-700 tracking-wide">Pemeriksaan Terpadu PTM Langkah Lanjutan Rujukan Jejaring dan Jaringan</p>
                             </div>
-                            <p class="text-gray-400">Terjebak di loop pikiran sendiri, menganalisis hal kecil sampai lupa caranya istirahat.</p>
                         </div>
-                        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-                             <div class="flex items-center gap-4 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
-                                <h3 class="text-xl font-bold text-white">Bingung Arah</h3>
-                            </div>
-                            <p class="text-gray-400">Quarter-life crisis terasa nyata. Disuruh sukses, tapi definisi 'sukses' itu sendiri nggak jelas.</p>
-                        </div>
-                        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-                            <div class="flex items-center gap-4 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V4a2 2 0 012-2h8a2 2 0 012 2v4z" /></svg>
-                                <h3 class="text-xl font-bold text-white">Relasi Menguras</h3>
-                            </div>
-                            <p class="text-gray-400">Terjebak dalam drama pertemanan atau percintaan yang bikin capek batin dan menguras energi.</p>
-                        </div>
-                        <div class="bg-gray-800 p-6 rounded-xl border border-gray-700">
-                            <div class="flex items-center gap-4 mb-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4z" /></svg>
-                                <h3 class="text-xl font-bold text-white">Tertekan Ekspektasi</h3>
-                            </div>
-                            <p class="text-gray-400">Merasa harus jadi orang lain demi diterima, sampai lupa versi asli diri lo itu seperti apa.</p>
+                        <p class="mb-10 max-w-3xl mx-auto text-gray-600">Inovasi kesehatan modern dari UPT Puskesmas Trajeng untuk masa depan Anda yang lebih sehat.</p>
+                        <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="text-white font-bold text-lg px-10 py-4 rounded-full primary-button">Mulai Skrining Sekarang</a>
+                    </div>
+                </section>
+
+                <!-- About Section -->
+                <section id="tentang" class="scroll-animate py-20 bg-white">
+                    <div class="container mx-auto px-6 text-center">
+                        <h2 class="text-3xl font-bold mb-4 section-title">Platform Kesehatan Terpadu</h2>
+                        <p class="max-w-3xl mx-auto text-gray-600 mb-12">PANDU MAHARAJA dirancang untuk melawan Penyakit Tidak Menular (PTM) melalui sistem digital yang memudahkan skrining, reservasi, dan pemantauan. Akses layanan kesehatan canggih kini ada di genggaman Anda.</p>
+                        <p class="text-lg text-gray-700 mb-8">Pilih layanan yang Anda butuhkan di bawah ini:</p>
+                        <div class="grid md:grid-cols-3 gap-8">
+                            <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="group block p-8 light-glass-card rounded-xl text-center flex flex-col justify-between">
+                                <div><h3 class="font-bold text-xl mb-3 text-gray-900">Reservasi PANDU</h3><p class="text-gray-600">Jadwalkan pemeriksaan lengkap di Puskesmas secara online.</p></div>
+                                <div class="mt-6 text-blue-500 font-semibold group-hover:text-purple-600 transition-colors">Akses Fitur &rarr;</div>
+                            </a>
+                            <a href="https://s.id/pumaplus" target="_blank" class="group block p-8 light-glass-card rounded-xl text-center flex flex-col justify-between">
+                                <div><h3 class="font-bold text-xl mb-3 text-gray-900">Skrining PUMA PLUS</h3><p class="text-gray-600">Ketahui risiko PTM Anda dengan formulir skrining mandiri.</p></div>
+                                 <div class="mt-6 text-blue-500 font-semibold group-hover:text-purple-600 transition-colors">Akses Fitur &rarr;</div>
+                            </a>
+                            <a href="https://form.gle/i8kbnapnZKz9wdXG9" target="_blank" class="group block p-8 light-glass-card rounded-xl text-center flex flex-col justify-between">
+                                 <div><h3 class="font-bold text-xl mb-3 text-gray-900">Skrining IVA & SADANIS</h3><p class="text-gray-600">Deteksi dini kanker serviks dan payudara.</p></div>
+                                 <div class="mt-6 text-blue-500 font-semibold group-hover:text-purple-600 transition-colors">Akses Fitur &rarr;</div>
+                            </a>
                         </div>
                     </div>
-                     <p class="mt-16 text-xl md:text-2xl text-gray-200 font-mono">It's not a bug, it's an undocumented feature. Kami bantu lo baca <span class="bg-yellow-300 text-gray-900 px-2 py-1 rounded">dokumentasinya.</span></p>
+                </section>
+
+                <!-- Flow Section -->
+                <section id="alur" class="scroll-animate py-20 bg-gray-50">
+                     <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-16 section-title">Tiga Langkah Mudah Menuju Sehat</h2>
+                    <div class="relative flex flex-col md:flex-row justify-center items-stretch gap-8">
+                        <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 -translate-y-1/2"></div>
+                        <div class="relative text-center p-8 light-glass-card rounded-xl w-full md:w-1/3 z-10"><div class="mb-4 text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">01</div><h3 class="font-bold text-lg mb-2 text-gray-900">Skrining & Penjaringan</h3><p class="text-gray-600">Deteksi risiko PTM dari Posyandu, rujukan, maupun skrining mandiri online.</p></div>
+                        <div class="relative text-center p-8 light-glass-card rounded-xl w-full md:w-1/3 z-10"><div class="mb-4 text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">02</div><h3 class="font-bold text-lg mb-2 text-gray-900">Pemeriksaan Terpadu</h3><p class="text-gray-600">Pemeriksaan lengkap terjadwal: Lab, EKG, Gizi, IVA, SADANIS, dan lainnya.</p></div>
+                        <div class="relative text-center p-8 light-glass-card rounded-xl w-full md:w-1/3 z-10"><div class="mb-4 text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600">03</div><h3 class="font-bold text-lg mb-2 text-gray-900">Evaluasi & Aksi</h3><p class="text-gray-600">Konsultasi hasil dengan dokter dan dapatkan rencana penanganan atau rujukan.</p></div>
+                    </div>
+                </div>
+                </section>
+                
+                <!-- Jadwal & Manfaat Section -->
+                <section id="jadwal-manfaat" class="scroll-animate py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <div class="grid md:grid-cols-2 gap-16 items-start">
+                            <div>
+                               <h2 class="text-3xl font-bold mb-8 section-title">Jadwal Pelayanan Khusus</h2>
+                               <div class="light-glass-card rounded-xl overflow-hidden">
+                                   <table class="w-full text-left">
+                                       <tbody class="divide-y divide-gray-200">
+                                           <tr class="hover:bg-gray-100"><td class="p-4 font-semibold text-gray-900">Rabu</td><td class="p-4 text-gray-600">Klinik UBM (Usaha Berhenti Merokok)</td></tr>
+                                           <tr class="hover:bg-gray-100"><td class="p-4 font-semibold text-gray-900">Kamis</td><td class="p-4 text-gray-600">Pemeriksaan Terpadu PANDU</td></tr>
+                                           <tr class="hover:bg-gray-100"><td class="p-4 font-semibold text-gray-900">Sabtu</td><td class="p-4 text-gray-600">IVA & SADANIS, Kesehatan Jiwa, Pemeriksaan Indra</td></tr>
+                                       </tbody>
+                                   </table>
+                               </div>
+                               <p class="text-center mt-4 text-gray-500 text-sm">*Jadwal dapat berubah, konfirmasi melalui reservasi online.</p>
+                            </div>
+                            <div>
+                               <h2 class="text-3xl font-bold mb-8 section-title">Manfaat Untuk Anda</h2>
+                               <ul class="space-y-4 text-gray-600">
+                                   <li class="flex items-start space-x-3"><span class="text-blue-500 mt-1 font-bold">✓</span><span>Deteksi penyakit lebih awal, obati lebih dini.</span></li>
+                                   <li class="flex items-start space-x-3"><span class="text-blue-500 mt-1 font-bold">✓</span><span>Pahami kondisi kesehatan Anda secara rutin dan lengkap.</span></li>
+                                   <li class="flex items-start space-x-3"><span class="text-blue-500 mt-1 font-bold">✓</span><span>Kontrol gaya hidup untuk pencegahan penyakit.</span></li>
+                                   <li class="flex items-start space-x-3"><span class="text-blue-500 mt-1 font-bold">✓</span><span>Lebih waspada terhadap risiko penyakit yang mungkin ada.</span></li>
+                                   <li class="flex items-start space-x-3"><span class="text-blue-500 mt-1 font-bold">✓</span><span>Layanan <strong>GRATIS</strong> untuk seluruh peserta BPJS Kesehatan.</span></li>
+                               </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Blog Highlight Section -->
+                <section id="artikel" class="scroll-animate py-20 bg-gray-50">
+                    <div class="container mx-auto px-6 text-center">
+                        <h2 class="text-3xl font-bold mb-4 section-title">Wawasan Kesehatan Terkini</h2>
+                        <p class="max-w-3xl mx-auto text-gray-600 mb-12">Baca artikel dan tips terbaru dari tim kami untuk membantu Anda hidup lebih sehat dan terhindar dari risiko Penyakit Tidak Menular.</p>
+                        <div id="blog-highlight-container" class="grid md:grid-cols-3 gap-8 mt-12"></div>
+                        <div class="mt-16"><a href="#" class="text-white font-bold text-lg px-10 py-4 rounded-full primary-button nav-link" data-page="blog-list-page">Lihat Semua Artikel</a></div>
+                    </div>
+                </section>
+                
+                <!-- Gallery Section -->
+                <section id="galeri" class="scroll-animate py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <h2 class="text-3xl font-bold text-center mb-16 section-title">Dokumentasi Kegiatan</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="https://placehold.co/400x400/3498DB/FFFFFF?text=Pemeriksaan+EKG" alt="Pemeriksaan EKG" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="https://placehold.co/400x400/2ECC71/FFFFFF?text=Konsultasi+Pasien" alt="Konsultasi Pasien" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="https://placehold.co/400x400/1ABC9C/FFFFFF?text=Skrining+Karyawan" alt="Skrining Karyawan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="https://placehold.co/400x400/E67E22/FFFFFF?text=Penyuluhan+Warga" alt="Penyuluhan Warga" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Blog List Page -->
+        <div id="blog-list-page" class="page">
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16"><h2 class="text-4xl font-bold mb-4 section-title">Semua Artikel</h2><p class="max-w-2xl mx-auto text-gray-600">Jelajahi arsip lengkap kami untuk wawasan mendalam tentang pencegahan dan pengelolaan Penyakit Tidak Menular.</p></div>
+                    <div id="blog-list-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
                 </div>
             </section>
-            
-            <!-- Bagian 3: The Solution -->
-            <section class="py-20 px-6 bg-gray-900">
-                <div class="max-w-6xl mx-auto text-center">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white">Selamat Datang di <span class="text-blue-500">Safe Space</span> untuk Logika & Rasa.</h2>
-                    <p class="mt-4 text-lg text-gray-400 max-w-3xl mx-auto">Kami percaya, setiap masalah punya pola dan setiap emosi punya logika. Di sini, kita nggak cuma bahas "perasaan", kita membedahnya.</p>
-                    <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="feature-card bg-gray-800 rounded-xl p-8 border border-gray-700 text-left">
-                            <h3 class="text-xl font-bold text-blue-400 font-mono">#KodeLogikaHidup</h3>
-                            <p class="mt-2 text-2xl font-bold text-white">Bedah Pola Semesta.</p>
-                            <p class="mt-4 text-gray-400">Pakai analogi dari sains & programming untuk menjelaskan kenapa hidup kadang terasa acak, padahal ada rumusnya.</p>
-                        </div>
-                        <div class="feature-card bg-gray-800 rounded-xl p-8 border border-gray-700 text-left">
-                            <h3 class="text-xl font-bold text-yellow-400 font-mono">#KodeKenaliDiri</h3>
-                            <p class="mt-2 text-2xl font-bold text-white">Decode Sistem Operasi Diri.</p>
-                            <p class="mt-4 text-gray-400">Pahami software internal lo. Dari cognitive bias (bug pikiran) sampai tipe kepribadian sebagai 'peta' diri.</p>
-                        </div>
-                        <div class="feature-card bg-gray-800 rounded-xl p-8 border border-gray-700 text-left">
-                            <h3 class="text-xl font-bold text-pink-400 font-mono">#KodeKelolaRasa</h3>
-                            <p class="mt-2 text-2xl font-bold text-white">Debug Emosi Lo.</p>
-                            <p class="mt-4 text-gray-400">Dapatkan 'rumus' praktis untuk mengelola cemas dan burnout. Bukan cuma "sabar ya", tapi "coba metode ini".</p>
-                        </div>
-                        <div class="feature-card bg-gray-800 rounded-xl p-8 border border-gray-700 text-left">
-                            <h3 class="text-xl font-bold text-teal-400 font-mono">#KodeTumbuhKembang</h3>
-                            <p class="mt-2 text-2xl font-bold text-white">Upgrade ke Versi Terbaru.</p>
-                            <p class="mt-4 text-gray-400">Navigasi fase-fase hidup, dari quarter-life crisis hingga membangun identitas otentik. Ini roadmap lo.</p>
-                        </div>
-                    </div>
-                </div>
+        </div>
+
+        <!-- Article Detail Page -->
+        <div id="article-detail-page" class="page">
+            <section class="py-20 bg-white">
+                <div id="article-content-container" class="container mx-auto px-6 max-w-4xl"></div>
             </section>
+        </div>
 
-            <!-- Bagian BARU: Pratinjau Tulisan -->
-            <section class="py-20 px-6 bg-gray-800/60">
-                 <div class="max-w-6xl mx-auto">
-                    <div class="text-center mb-16">
-                        <h2 class="text-3xl md:text-5xl font-bold text-white">Peta & Kompas Pikiran Terbaru</h2>
-                        <p class="mt-4 text-lg text-gray-400">Beberapa pemikiran terbaru dari Ruang Dekode kami. Untuk kamu yang butuh perspektif baru.</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <!-- Article Card 1 -->
-                        <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-1')">
-                            <img src="https://placehold.co/600x400/111827/3b82f6?text=Teori+Game" alt="Ilustrasi Teori Game" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <p class="text-blue-400 font-mono text-sm">#KodeLogikaHidup</p>
-                                <h3 class="text-xl font-bold text-white mt-2">Hidup Itu Teori Game: Kapan Harus Kompetisi, Kapan Harus Kolaborasi?</h3>
-                                <p class="text-gray-400 mt-2">Melihat interaksi sosial lewat kacamata 'game theory' bisa mengubah caramu mengambil keputusan dalam karir dan relasi.</p>
-                                <span class="text-yellow-400 font-bold mt-4 inline-block hover:text-yellow-300">Baca selengkapnya &rarr;</span>
-                            </div>
-                        </div>
-                        <!-- Article Card 2 -->
-                        <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-2')">
-                            <img src="https://placehold.co/600x400/111827/ec4899?text=Cognitive+Bias" alt="Ilustrasi Cognitive Bias" class="w-full h-48 object-cover">
-                             <div class="p-6">
-                                <p class="text-pink-400 font-mono text-sm">#KodeKenaliDiri</p>
-                                <h3 class="text-xl font-bold text-white mt-2">5 Bug Pikiran (Cognitive Bias) yang Bikin Lo Salah Ambil Keputusan</h3>
-                                <p class="text-gray-400 mt-2">Otak kita punya 'shortcut' yang seringkali menyesatkan. Kenali polanya agar kamu tidak terjebak.</p>
-                                <span class="text-yellow-400 font-bold mt-4 inline-block hover:text-yellow-300">Baca selengkapnya &rarr;</span>
-                            </div>
-                        </div>
-                        <!-- Article Card 3 -->
-                        <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-3')">
-                             <img src="https://placehold.co/600x400/111827/10b981?text=Identitas" alt="Ilustrasi Identitas Digital" class="w-full h-48 object-cover">
-                             <div class="p-6">
-                                <p class="text-teal-400 font-mono text-sm">#KodeTumbuhKembang</p>
-                                <h3 class="text-xl font-bold text-white mt-2">Membangun Identitas di Era Digital: Antara Persona & Diri Asli</h3>
-                                <p class="text-gray-400 mt-2">Bagaimana cara tetap otentik saat tekanan untuk menampilkan 'citra sempurna' begitu besar di media sosial?</p>
-                                <span class="text-yellow-400 font-bold mt-4 inline-block hover:text-yellow-300">Baca selengkapnya &rarr;</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-center mt-12">
-                        <a href="#" onclick="showPage('decode-room'); return false;" class="social-btn bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300">
-                            Masuk Ruang Dekode
-                        </a>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Bagian 6: Final Call-to-Action -->
-            <section id="join" class="py-20 px-6 bg-blue-600 text-white text-center bg-gradient-to-br from-blue-600 to-gray-900">
-                 <div class="max-w-4xl mx-auto">
-                    <h2 class="text-4xl md:text-6xl font-black uppercase">Siap Untuk Upgrade?</h2>
-                    <p class="mt-4 text-lg md:text-xl max-w-2xl mx-auto">Jadilah bagian dari komunitas kami tempat para overthinker dan pencari makna berkumpul.</p>
-                    <div class="mt-20 bg-gray-900/50 p-8 rounded-lg max-w-2xl mx-auto">
-                         <h3 class="text-2xl font-bold">Dapatkan Weekly Patch Notes.</h3>
-                         <p class="mt-2 text-gray-300">Insight eksklusif & tools terbaru langsung ke inbox lo. Tanpa spam, hanya brain food.</p>
-                         <form class="mt-6 flex flex-col sm:flex-row gap-2">
-                            <input type="email" placeholder="Masukkan email kamu di sini..." class="w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <button type="submit" class="bg-yellow-400 text-gray-900 font-bold py-3 px-6 rounded-md hover:bg-yellow-300 transition-colors duration-300 flex-shrink-0">DAFTAR</button>
-                         </form>
-                    </div>
-                 </div>
-            </section>
-        </main>
-
-        <!-- ===== DECODE ROOM (ARCHIVE) PAGE ===== -->
-        <section id="decode-room" class="page min-h-screen py-24 px-6 bg-gray-900">
-            <div class="max-w-6xl mx-auto">
-                <div class="text-center mb-16">
-                    <h1 class="text-4xl md:text-6xl font-bold text-white font-mono">Ruang Dekode</h1>
-                    <p class="mt-4 text-lg text-gray-400">Kumpulan peta & kompas untuk menavigasi pikiran dan kehidupan.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Semua artikel ada di sini -->
-                    <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-1')">
-                        <img src="https://placehold.co/600x400/111827/3b82f6?text=Teori+Game" alt="Ilustrasi Teori Game" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <p class="text-blue-400 font-mono text-sm">#KodeLogikaHidup</p>
-                            <h3 class="text-xl font-bold text-white mt-2">Hidup Itu Teori Game: Kapan Harus Kompetisi, Kapan Harus Kolaborasi?</h3>
-                        </div>
-                    </div>
-                    <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-2')">
-                        <img src="https://placehold.co/600x400/111827/ec4899?text=Cognitive+Bias" alt="Ilustrasi Cognitive Bias" class="w-full h-48 object-cover">
-                         <div class="p-6">
-                            <p class="text-pink-400 font-mono text-sm">#KodeKenaliDiri</p>
-                            <h3 class="text-xl font-bold text-white mt-2">5 Bug Pikiran (Cognitive Bias) yang Bikin Lo Salah Ambil Keputusan</h3>
-                        </div>
-                    </div>
-                    <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-3')">
-                         <img src="https://placehold.co/600x400/111827/10b981?text=Identitas" alt="Ilustrasi Identitas Digital" class="w-full h-48 object-cover">
-                         <div class="p-6">
-                            <p class="text-teal-400 font-mono text-sm">#KodeTumbuhKembang</p>
-                            <h3 class="text-xl font-bold text-white mt-2">Membangun Identitas di Era Digital: Antara Persona & Diri Asli</h3>
-                        </div>
-                    </div>
-                    <div class="article-card bg-gray-800 rounded-xl overflow-hidden border border-gray-700" onclick="showPage('article-4')">
-                         <img src="https://placehold.co/600x400/111827/f59e0b?text=Stoicism" alt="Ilustrasi Stoicism" class="w-full h-48 object-cover">
-                         <div class="p-6">
-                            <p class="text-yellow-400 font-mono text-sm">#KodeKelolaRasa</p>
-                            <h3 class="text-xl font-bold text-white mt-2">Prinsip Stoik untuk Overthinker: Cara Memisahkan Apa yang Bisa dan Tidak Bisa Dikontrol</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== ARTICLE PAGES ===== -->
-        <article id="article-1" class="page min-h-screen py-24 px-6 bg-gray-900">
-            <div class="max-w-3xl mx-auto">
-                <a href="#" onclick="showPage('decode-room'); return false;" class="text-blue-400 hover:text-blue-300 font-mono">&larr; Kembali ke Ruang Dekode</a>
-                <div class="mt-8 prose prose-lg prose-invert max-w-none">
-                    <p class="text-blue-400 font-mono">#KodeLogikaHidup</p>
-                    <h1>Hidup Itu Teori Game: Kapan Harus Kompetisi, Kapan Harus Kolaborasi?</h1>
-                    <img src="https://placehold.co/800x400/111827/3b82f6?text=Zero-Sum+vs+Non-Zero-Sum" alt="Ilustrasi Teori Game" class="rounded-lg">
-                    <p>Seringkali kita melihat hidup sebagai sebuah arena kompetisi. Siapa yang dapat promosi jabatan, siapa yang punya follower lebih banyak, siapa yang lebih 'sukses'. Pola pikir ini disebut <strong>Zero-Sum Game</strong>: agar saya menang, orang lain harus kalah. Seperti sepotong kue, jika saya ambil bagian lebih besar, bagianmu pasti lebih kecil.</p>
-                    <p>Tapi, sebagian besar area penting dalam hidup sebenarnya adalah <strong>Non-Zero-Sum Game</strong>. Ini adalah permainan di mana semua pihak bisa menang bersama, atau kalah bersama. Pikirkan tentang membangun startup dengan co-founder, atau menjalin hubungan pertemanan yang sehat. Kesuksesan satu orang tidak harus berarti kegagalan orang lain. Justru, kolaborasi bisa menciptakan 'kue' yang lebih besar untuk semua.</p>
-                    <blockquote>Kunci dari kebijaksanaan adalah mengetahui permainan apa yang sedang kamu mainkan.</blockquote>
-                    <h2>Kapan Harus Kompetisi (Zero-Sum)?</h2>
-                    <p>Beberapa situasi memang bersifat kompetitif. Misalnya saat melamar pekerjaan dengan kuota terbatas, atau saat mengikuti tender proyek. Dalam situasi ini, fokus pada peningkatan skill dan strategi pribadi adalah kuncinya. Tapi ingat, ini hanya sebagian kecil dari 'permainan' hidup.</p>
-                    <h2>Kapan Harus Kolaborasi (Non-Zero-Sum)?</h2>
-                    <p>Di sinilah keajaiban terjadi. Coba lihat area-area ini sebagai ladang kolaborasi:</p>
-                    <ul>
-                        <li><strong>Karir:</strong> Daripada melihat rekan kerja sebagai saingan, lihat mereka sebagai partner. Berbagi ilmu dan membangun jaringan akan membawa keuntungan jangka panjang yang lebih besar daripada sekadar 'menang' dalam satu proyek.</li>
-                        <li><strong>Relasi:</strong> Hubungan yang sehat, baik percintaan maupun pertemanan, adalah bentuk utama dari non-zero-sum game. Tujuannya bukan untuk 'menang' dalam argumen, tapi untuk tumbuh bersama dan saling mendukung.</li>
-                        <li><strong>Belajar:</strong> Diskusi dalam sebuah kelompok belajar akan memperkaya pemahaman semua anggotanya, jauh lebih efektif daripada belajar sendiri-sendiri dan menyembunyikan pengetahuan.</li>
-                    </ul>
-                    <h2>Kesimpulan</h2>
-                    <p>Sebelum masuk ke sebuah 'permainan', tanyakan pada dirimu: "Apakah kemenangan saya harus dibayar dengan kekalahan orang lain?" Jika tidak, maka kamu berada di ladang kolaborasi. Ubah mindset dari "bagaimana saya bisa menang?" menjadi "bagaimana kita bisa menang bersama?". Dengan begitu, kamu tidak hanya bermain, tapi juga merancang permainan yang lebih baik untuk semua.</p>
-                </div>
-            </div>
-        </article>
-
-        <article id="article-2" class="page min-h-screen py-24 px-6 bg-gray-900">
-            <div class="max-w-3xl mx-auto">
-                <a href="#" onclick="showPage('decode-room'); return false;" class="text-pink-400 hover:text-pink-300 font-mono">&larr; Kembali ke Ruang Dekode</a>
-                <div class="mt-8 prose prose-lg prose-invert max-w-none">
-                    <p class="text-pink-400 font-mono">#KodeKenaliDiri</p>
-                    <h1>5 Bug Pikiran (Cognitive Bias) yang Bikin Lo Salah Ambil Keputusan</h1>
-                    <img src="https://placehold.co/800x400/111827/ec4899?text=Brain+Bugs" alt="Ilustrasi Bug Pikiran" class="rounded-lg">
-                    <p>Otak kita adalah mesin yang luar biasa, tapi tidak sempurna. Untuk menghemat energi, otak sering menggunakan 'shortcut' atau jalan pintas mental. Masalahnya, jalan pintas ini seringkali menyebabkan kesalahan sistematis dalam berpikir, atau yang disebut <strong>Cognitive Bias</strong>. Ini adalah 'bug' dalam sistem operasi pikiran kita. Mengenalinya adalah langkah pertama untuk men-debug-nya.</p>
-                    
-                    <h2>1. Confirmation Bias (Bias Konfirmasi)</h2>
-                    <p><strong>Bug:</strong> Kecenderungan untuk mencari, menafsirkan, dan mengingat informasi yang mengkonfirmasi keyakinan yang sudah ada. Kita suka saat dibilang benar.
-                    <br><strong>Contoh:</strong> Jika kamu percaya bahwa zodiak Leo itu keras kepala, kamu akan lebih mudah mengingat momen-momen saat temanmu yang Leo bersikap keras kepala, dan mengabaikan saat-saat ia fleksibel.</p>
-                    
-                    <h2>2. Sunk Cost Fallacy</h2>
-                    <p><strong>Bug:</strong> Terus melanjutkan suatu usaha (investasi, proyek, hubungan) karena sudah terlalu banyak sumber daya (waktu, uang, emosi) yang ditanamkan, meskipun usaha itu jelas-jelas tidak menguntungkan lagi.
-                    <br><strong>Contoh:</strong> Tetap menonton film yang membosankan sampai habis hanya karena sudah bayar tiketnya, padahal waktumu bisa digunakan untuk hal yang lebih menyenangkan.</p>
-
-                    <h2>3. Dunning-Kruger Effect</h2>
-                    <p><strong>Bug:</strong> Orang dengan kompetensi rendah cenderung melebih-lebihkan kemampuannya, sementara orang dengan kompetensi tinggi justru cenderung meremehkan kemampuannya.
-                    <br><strong>Contoh:</strong> Seseorang yang baru belajar main gitar selama seminggu merasa sudah siap ikut audisi band besar.</p>
-
-                    <h2>4. Availability Heuristic (Heuristik Ketersediaan)</h2>
-                    <p><strong>Bug:</strong> Menganggap sesuatu lebih mungkin terjadi jika kita bisa dengan mudah mengingat contohnya. Sesuatu yang lebih dramatis atau baru terjadi akan terasa lebih signifikan.
-                    <br><strong>Contoh:</strong> Merasa takut naik pesawat setelah melihat berita kecelakaan pesawat, padahal secara statistik, naik mobil jauh lebih berisiko.</p>
-
-                    <h2>5. Negativity Bias (Bias Negativitas)</h2>
-                    <p><strong>Bug:</strong> Pengalaman, emosi, dan informasi negatif memiliki dampak psikologis yang lebih besar daripada yang positif. Satu kritik lebih membekas daripada sepuluh pujian.
-                    <br><strong>Contoh:</strong> Kamu mendapat review kerja yang 90% positif, tapi kamu justru terus menerus memikirkan satu poin kritik kecil.</p>
-
-                    <blockquote>Mengetahui nama 'bug' nya adalah setengah dari perbaikan.</blockquote>
-                    <p>Dengan menyadari adanya bias-bias ini, kamu bisa berhenti sejenak sebelum mengambil keputusan. Tanyakan pada diri sendiri: "Apakah saya melihat ini secara objektif, atau saya hanya mengkonfirmasi apa yang ingin saya percaya?"</p>
-                </div>
-            </div>
-        </article>
-        
-        <article id="article-3" class="page min-h-screen py-24 px-6 bg-gray-900">
-             <div class="max-w-3xl mx-auto">
-                <a href="#" onclick="showPage('decode-room'); return false;" class="text-teal-400 hover:text-teal-300 font-mono">&larr; Kembali ke Ruang Dekode</a>
-                <div class="mt-8 prose prose-lg prose-invert max-w-none">
-                    <p class="text-teal-400 font-mono">#KodeTumbuhKembang</p>
-                    <h1>Membangun Identitas di Era Digital: Antara Persona & Diri Asli</h1>
-                     <img src="https://placehold.co/800x400/111827/10b981?text=Persona+vs+Self" alt="Ilustrasi Persona vs Diri Asli" class="rounded-lg">
-                    <p>Media sosial memberi kita panggung. Kita adalah sutradara, penulis skenario, sekaligus aktor utama dari film tentang hidup kita. Kita memilih 'highlight reel'—foto liburan terbaik, pencapaian karir, momen bahagia—dan menyajikannya sebagai sebuah narasi. Narasi ini kita sebut <strong>Persona Digital</strong>.</p>
-                    <p>Tidak ada yang salah dengan persona. Itu adalah bagian dari cara kita berinteraksi. Masalah muncul ketika ada jurang yang terlalu lebar antara persona yang kita tampilkan dengan <strong>Diri Asli (Authentic Self)</strong>—siapa kita sebenarnya di balik layar, dengan segala kerumitan, kegagalan, dan ketidaksempurnaannya.</p>
-                    <blockquote>Kelelahan terbesar di era digital bukan karena terlalu banyak informasi, tapi karena terlalu berat menopang persona.</blockquote>
-                    <h2>Biaya dari Jurang yang Terlalu Lebar</h2>
-                    <p>Ketika persona dan diri asli terlalu jauh berbeda, kita membayar biaya mental:</p>
-                    <ul>
-                        <li><strong>Impostor Syndrome:</strong> Merasa seperti penipu, takut suatu saat 'kedok' kita akan terbongkar. Pujian terasa hampa karena rasanya itu ditujukan untuk persona, bukan diri kita yang sebenarnya.</li>
-                        <li><strong>Kecemasan Sosial:</strong> Takut bertemu orang di dunia nyata karena khawatir tidak bisa memenuhi ekspektasi yang sudah dibangun oleh persona digital kita.</li>
-                        <li><strong>Kehilangan Arah:</strong> Terlalu fokus pada apa yang 'terlihat bagus' di mata orang lain, kita bisa lupa pada apa yang benar-benar penting bagi diri kita sendiri.</li>
-                    </ul>
-                    <h2>Menjembatani Jurang: Langkah Praktis Menuju Otentisitas</h2>
-                    <p>Tujuannya bukan untuk menghapus persona, tapi untuk membuatnya lebih selaras dengan diri asli. Coba langkah-langkah ini:</p>
-                    <ol>
-                        <li><strong>Audit Konten Personal:</strong> Lihat kembali postinganmu. Apakah itu mencerminkan nilai-nilaimu, atau hanya mencerminkan apa yang kamu pikir akan disukai orang lain?</li>
-                        <li><strong>Bagikan 'Proses', Bukan Hanya 'Hasil':</strong> Sesekali, tunjukkan proses di balik layar. Ceritakan tentang tantangan yang kamu hadapi, bukan hanya kesuksesannya. Ini membuatmu lebih manusiawi dan terkoneksi.</li>
-                        <li><strong>Kurasi Konsumsi, Bukan Hanya Produksi:</strong> Unfollow akun-akun yang membuatmu merasa tidak cukup baik. Ikuti kreator yang menunjukkan kerentanan dan kejujuran. Lingkungan digitalmu mempengaruhi cara pandangmu terhadap diri sendiri.</li>
-                        <li><strong>Jadwalkan 'Offline' yang Sebenarnya:</strong> Luangkan waktu tanpa layar, di mana satu-satunya audiens adalah dirimu sendiri. Lakukan hobi yang tidak perlu didokumentasikan.</li>
-                    </ol>
-                    <p>Menjadi otentik di era digital adalah sebuah latihan terus-menerus. Ini adalah tentang berani menunjukkan lebih banyak bagian dari diri kita yang asli, bahkan bagian yang tidak sempurna, dan percaya bahwa itu sudah cukup baik.</p>
-                </div>
-            </div>
-        </article>
-
-        <article id="article-4" class="page min-h-screen py-24 px-6 bg-gray-900">
-             <div class="max-w-3xl mx-auto">
-                <a href="#" onclick="showPage('decode-room'); return false;" class="text-yellow-400 hover:text-yellow-300 font-mono">&larr; Kembali ke Ruang Dekode</a>
-                <div class="mt-8 prose prose-lg prose-invert max-w-none">
-                    <p class="text-yellow-400 font-mono">#KodeKelolaRasa</p>
-                    <h1>Prinsip Stoik untuk Overthinker: Cara Memisahkan Apa yang Bisa dan Tidak Bisa Dikontrol</h1>
-                     <img src="https://placehold.co/800x400/111827/f59e0b?text=Dichotomy+of+Control" alt="Ilustrasi Dichotomy of Control" class="rounded-lg">
-                    <p>Overthinking seringkali berakar dari keinginan untuk mengontrol segalanya. Kita cemas tentang masa depan, menyesali masa lalu, dan khawatir tentang pendapat orang lain. Filsafat Stoikisme, yang berusia ribuan tahun, menawarkan sebuah 'algoritma' yang sangat kuat untuk mengatasi ini: <strong>Dichotomy of Control</strong> (Dikotomi Kendali).</p>
-                    <p>Prinsipnya sederhana: bagi semua hal di dunia ini menjadi dua kategori.</p>
-                    <ol>
-                        <li><strong>Hal-hal yang Sepenuhnya di Bawah Kendalimu.</strong></li>
-                        <li><strong>Hal-hal yang Sama Sekali Tidak di Bawah Kendalimu.</strong></li>
-                    </ol>
-                    <p>Ketenangan, menurut para Stoik, datang dari memfokuskan 100% energi kita pada kategori pertama, dan belajar menerima kategori kedua dengan lapang dada.</p>
-                    <blockquote>"Sumber utama dari kecemasan adalah mencoba mengendalikan apa yang tidak bisa kita kendalikan."</blockquote>
-                    <h2>Apa yang Bisa Kamu Kontrol?</h2>
-                    <p>Daftarnya sebenarnya sangat pendek, tapi sangat mendalam:</p>
-                    <ul>
-                        <li><strong>Pikiran dan opinimu:</strong> Bagaimana kamu menafsirkan sebuah kejadian.</li>
-                        <li><strong>Tindakan dan pilihanmu:</strong> Upaya yang kamu kerahkan, keputusan yang kamu ambil.</li>
-                        <li><strong>Nilai-nilai dan prinsipmu:</strong> Standar yang kamu pegang untuk dirimu sendiri.</li>
-                    </ul>
-                    <p>Itu saja. Ini adalah kerajaanmu. Di sinilah kamu berdaulat penuh.</p>
-                    <h2>Apa yang Tidak Bisa Kamu Kontrol?</h2>
-                    <p>Pada dasarnya, semua hal lain:</p>
-                    <ul>
-                        <li><strong>Hasil dari tindakanmu:</strong> Kamu bisa belajar mati-matian (bisa dikontrol), tapi hasil ujiannya (tidak bisa dikontrol).</li>
-                        <li><strong>Pendapat orang lain tentangmu:</strong> Kamu bisa bersikap baik (bisa dikontrol), tapi apa yang mereka pikirkan tentangmu (tidak bisa dikontrol).</li>
-                        <li><strong>Kesehatanmu (sebagian besar):</strong> Kamu bisa makan sehat dan olahraga (bisa dikontrol), tapi kamu tidak bisa 100% mencegah penyakit.</li>
-                        <li><strong>Masa lalu dan masa depan.</strong></li>
-                        <li><strong>Cuaca, ekonomi, lalu lintas.</strong></li>
-                    </ul>
-                    <h2>Latihan Praktis untuk Overthinker</h2>
-                    <p>Saat kamu merasa cemas atau terjebak dalam overthinking, ambil pulpen dan kertas. Buat dua kolom: "Bisa Dikontrol" dan "Tidak Bisa Dikontrol". Tulis semua hal yang membuatmu cemas di kolom yang sesuai.</p>
-                    <p>Kamu akan sadar bahwa sebagian besar kecemasanmu ada di kolom "Tidak Bisa Dikontrol". Untuk hal-hal di kolom ini, tugasmu adalah belajar menerimanya. Ucapkan, "Ini di luar kendaliku."</p>
-                    <p>Lalu, lihat kolom "Bisa Dikontrol". Di sinilah letak kekuatanmu. Pilih satu tindakan kecil yang bisa kamu lakukan sekarang juga. Daripada cemas tentang presentasi besok (hasil), fokuslah pada riset satu paragraf lagi untuk materimu (upaya).</p>
-                    <p>Dengan melatih otot mental ini secara konsisten, kamu akan memindahkan energimu dari kekhawatiran yang sia-sia ke tindakan yang bermakna. Itulah inti dari ketenangan seorang Stoik.</p>
-                </div>
-            </div>
-        </article>
-
-        <!-- ===== ABOUT PAGE (UPDATED) ===== -->
-        <section id="about" class="page min-h-screen py-24 px-6 bg-gray-900">
-            <div class="max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-bold text-white text-center">Tentang <span class="text-blue-500">Kode Diri</span></h1>
-                <div class="mt-12 text-lg text-gray-300 space-y-6 bg-gray-800/50 p-8 rounded-lg">
-                    <p><strong>Kode Diri</strong> lahir dari kegelisahan sederhana: Kenapa sih kita diajarin rumus matematika yang rumit, tapi nggak pernah diajarin rumus buat ngertiin diri sendiri? Kenapa kita bisa nge-debug kode komputer, tapi susah banget nge-debug emosi kita?</p>
-                    <p>Kita bukan platform motivasi biasa yang cuma ngasih jawaban instan atau kutipan klise. Sebaliknya, kita nawarin sesuatu yang lebih fundamental: <strong>kerangka berpikir (mental models)</strong>.</p>
-                    <p>Misi kita itu nerjemahin konsep-konsep ribet dari psikologi, sains, sampe filsafat, jadi analogi yang gampang lo pahamin dan alat yang praktis. Kita percaya, dengan ngertiin 'kode' atau pola di balik kelakuan, emosi, dan sistem di sekitar kita, lo bisa ngejalanin hidup dengan lebih bijak dan tenang.</p>
-                    <h2 class="text-2xl font-bold text-white pt-6">Siapa di Balik Layar?</h2>
-                    <div class="mt-8 flex flex-col md:flex-row items-center gap-8">
-                        <img src="https://placehold.co/150x150/1F2937/E5E7EB?text=Dzak" alt="Foto Dzak" class="w-36 h-36 rounded-full object-cover border-4 border-blue-500">
-                        <div>
-                            <p class="text-xl font-bold text-blue-400">Dzak,</p>
-                            <p class="font-medium text-gray-400 font-mono">Founder Kode Diri_</p>
-                            <p class="mt-2 text-gray-400 italic">"Gue cuma orang yang penasaran dan terobsesi sama pola. Kode Diri ini 'catatan lapangan' gue dalam usaha memahami kekacauan hidup. Semoga catatan ini bisa bermanfaat buat perjalanan lo juga."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== CONTACT PAGE ===== -->
-        <section id="contact" class="page min-h-screen py-24 px-6 bg-gray-900">
-            <div class="max-w-2xl mx-auto">
-                <div class="text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold text-white">Hubungi Kami</h1>
-                    <p class="mt-4 text-lg text-gray-400">Punya pertanyaan, feedback, atau ide kolaborasi? Kami senang mendengar darimu.</p>
-                </div>
-                <form class="mt-12 space-y-6 bg-gray-800/50 p-8 rounded-lg">
+        <!-- Footer -->
+        <footer id="kontak" class="bg-gray-800 text-gray-300">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
+                    <div><h3 class="font-bold text-xl mb-2 text-white">PANDU MAHARAJA</h3><p class="text-gray-400">Inovasi UPT Puskesmas Trajeng<br>Kota Pasuruan</p></div>
                     <div>
-                        <label for="name" class="block text-sm font-medium text-gray-300">Nama</label>
-                        <input type="text" id="name" class="mt-1 w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <h3 class="font-bold text-lg mb-2 text-white">Kontak & Alamat</h3>
+                        <p class="text-gray-400">Jl. Maluku No.1, Trajeng, Kec. Gadingrejo, Kota Pasuruan, Jawa Timur 67132</p>
+                        <p class="text-gray-400">Telf: (0343) 421616</p>
                     </div>
-                     <div>
-                        <label for="email-contact" class="block text-sm font-medium text-gray-300">Email</label>
-                        <input type="email" id="email-contact" class="mt-1 w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-                     <div>
-                        <label for="message" class="block text-sm font-medium text-gray-300">Pesan</label>
-                        <textarea id="message" rows="5" class="mt-1 w-full bg-gray-800 text-white placeholder-gray-500 px-4 py-3 rounded-md border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="social-btn w-full bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg transition-transform duration-300">
-                            Kirim Pesan
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </section>
-
-        <!-- ===== PRIVACY POLICY PAGE ===== -->
-        <section id="privacy" class="page min-h-screen py-24 px-6 bg-gray-900">
-             <div class="max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-5xl font-bold text-white text-center">Kebijakan Privasi</h1>
-                 <div class="mt-12 text-gray-400 space-y-6 prose prose-invert max-w-none bg-gray-800/50 p-8 rounded-lg">
-                    <p>Terakhir diperbarui: 17 Juni 2025</p>
-                    <p>Terima kasih telah mengunjungi Kode Diri. Privasi Anda sangat penting bagi kami. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi Anda.</p>
-                    
-                    <h2>Informasi yang Kami Kumpulkan</h2>
-                    <p>Kami mengumpulkan informasi yang Anda berikan secara langsung kepada kami, seperti saat Anda mendaftar untuk buletin mingguan kami (Weekly Patch Notes) atau menghubungi kami melalui formulir kontak. Informasi ini mungkin termasuk:</p>
-                    <ul>
-                        <li>Alamat email</li>
-                        <li>Nama</li>
-                    </ul>
-
-                    <h2>Bagaimana Kami Menggunakan Informasi Anda</h2>
-                    <p>Kami menggunakan informasi yang kami kumpulkan untuk:</p>
-                    <ul>
-                        <li>Mengirimkan buletin, konten, dan pembaruan lainnya.</li>
-                        <li>Merespons pertanyaan dan masukan Anda.</li>
-                        <li>Meningkatkan konten dan layanan kami.</li>
-                    </ul>
-
-                    <h2>Pembagian Informasi</h2>
-                    <p>Kami tidak akan membagikan atau menjual informasi pribadi Anda kepada pihak ketiga untuk tujuan pemasaran. Informasi Anda hanya digunakan untuk keperluan internal Kode Diri.</p>
-
-                    <h2>Keamanan</h2>
-                    <p>Kami mengambil langkah-langkah yang wajar untuk melindungi informasi Anda dari kehilangan, penyalahgunaan, dan akses yang tidak sah. Namun, tidak ada transmisi internet atau email yang sepenuhnya aman atau bebas dari kesalahan.</p>
-
-                    <h2>Perubahan pada Kebijakan Ini</h2>
-                    <p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Kami akan memberitahu Anda tentang perubahan apa pun dengan memposting kebijakan privasi baru di halaman ini.</p>
+                    <div><h3 class="font-bold text-lg mb-2 text-white">Inovator</h3><p class="text-gray-400">Yeni Siti Irianti, A.Md.Kep</p></div>
                 </div>
-            </div>
-        </section>
-
-
-        <!-- Universal Footer -->
-        <footer class="bg-gray-900 py-8 px-6 text-center text-gray-500 relative z-10">
-            <p>© 2025 Kode Diri. Sebuah ruang untuk membaca pola dan memahami diri.</p>
-            <div class="mt-4 flex justify-center flex-wrap gap-6">
-                <a href="#" onclick="showPage('about'); return false;" class="hover:text-white">Tentang Kami</a>
-                <a href="#" onclick="showPage('contact'); return false;" class="hover:text-white">Kontak</a>
-                <a href="#" onclick="showPage('privacy'); return false;" class="hover:text-white">Kebijakan Privasi</a>
+                <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-500 text-sm"><p>&copy; 2025 UPT Puskesmas Trajeng. Dirancang untuk kesehatan masyarakat.</p></div>
             </div>
         </footer>
-
     </div>
     
-    <!-- Particles.js for background animation -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // --- Page Navigation Logic ---
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            // Show the requested page
-            const newPage = document.getElementById(pageId);
-            if (newPage) {
-                newPage.classList.add('active');
-            }
-            // Scroll to top of the page
-            window.scrollTo(0, 0);
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top-btn" class="primary-button fixed bottom-5 right-5 p-3 rounded-full text-white shadow-lg opacity-0 invisible transition-all duration-300 hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" /></svg>
+    </button>
 
-            // Show/hide nav bar
-            const nav = document.getElementById('main-nav');
-            if(pageId === 'home') {
-                nav.style.top = '-100px';
-            } else {
-                nav.style.top = '0';
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex justify-center items-center p-4 transition-opacity duration-300">
+        <span id="modal-close" class="absolute top-5 right-8 text-white text-5xl font-bold cursor-pointer hover:text-blue-400 transition-colors">&times;</span>
+        <img id="modal-image" src="" alt="Gambar Diperbesar" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl shadow-blue-500/20">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA BLOG ---
+            const blogPosts = [
+                { id: 1, title: '5 Langkah Mudah Mengelola Hipertensi di Rumah', author: 'Tim PANDU MAHARAJA', date: '21 Juni 2025', category: 'Hipertensi', image: 'https://placehold.co/600x400/3b82f6/FFFFFF?text=Hipertensi', content: `<p class="mb-4">Hipertensi, atau tekanan darah tinggi, adalah "pembunuh senyap" yang seringkali tidak menunjukkan gejala. Namun, mengelolanya tidak harus menjadi beban. Berikut adalah lima langkah praktis yang bisa Anda terapkan setiap hari:</p><ol class="list-decimal list-inside space-y-3 mb-4"><li><strong>Pantau Tekanan Darah Secara Rutin:</strong> Memiliki tensimeter digital di rumah adalah investasi kesehatan yang sangat baik. Catat hasilnya untuk melihat tren dan diskusikan dengan dokter Anda.</li><li><strong>Kurangi Asupan Garam (Natrium):</strong> Hindari makanan olahan, makanan cepat saji, dan jangan menambahkan garam berlebih pada masakan. Perbanyak konsumsi buah dan sayuran segar.</li><li><strong>Aktivitas Fisik Teratur:</strong> Cukup 30 menit berjalan cepat setiap hari dapat membuat perbedaan besar. Pilihlah aktivitas yang Anda nikmati agar konsisten.</li><li><strong>Kelola Stres:</strong> Stres dapat meningkatkan tekanan darah sementara. Coba teknik relaksasi seperti pernapasan dalam, meditasi, atau melakukan hobi yang menenangkan.</li><li><strong>Minum Obat Sesuai Anjuran:</strong> Jika dokter meresepkan obat, minumlah secara teratur sesuai petunjuk. Jangan menghentikan atau mengubah dosis tanpa berkonsultasi terlebih dahulu.</li></ol><p>Dengan disiplin menerapkan langkah-langkah ini, Anda memegang kendali atas kesehatan Anda dan mengurangi risiko komplikasi serius seperti penyakit jantung dan stroke.</p>`},
+                { id: 2, title: 'Gula Tersembunyi: Kenali Musuh dalam Makanan Anda', author: 'Tim PANDU MAHARAJA', date: '18 Juni 2025', category: 'Diabetes', image: 'https://placehold.co/600x400/8b5cf6/FFFFFF?text=Gula+Darah', content: `<p class="mb-4">Saat kita berpikir tentang gula, kita sering membayangkan gula pasir atau permen. Padahal, gula memiliki banyak nama dan seringkali "bersembunyi" di dalam produk makanan dan minuman yang kita anggap sehat.</p><strong class="text-gray-900 text-lg block mb-2">Di mana Gula Bersembunyi?</strong><ul class="list-disc list-inside space-y-2 mb-4"><li><strong>Minuman Kemasan:</strong> Jus buah kotak, teh manis kemasan, dan minuman bersoda adalah sumber gula tambahan terbesar.</li><li><strong>Saus dan Bumbu:</strong> Saus tomat, saus sambal botolan, dan saus salad seringkali mengandung banyak gula.</li><li><strong>Sereal Sarapan:</strong> Banyak sereal, terutama yang ditujukan untuk anak-anak, dilapisi gula.</li><li><strong>Roti Tawar Putih:</strong> Roti jenis ini memiliki indeks glikemik tinggi dan cepat diubah menjadi gula dalam tubuh.</li></ul><strong class="text-gray-900 text-lg block mb-2">Bagaimana Cara Menghindarinya?</strong><p>Selalu periksa label informasi nilai gizi. Waspadai nama lain gula seperti sirup jagung fruktosa tinggi, sukrosa, dekstrosa, maltosa, dan madu. Pilihlah air putih sebagai minuman utama dan konsumsi makanan utuh (whole foods) yang tidak diproses.</p>`},
+                { id: 3, title: 'Pentingnya SADARI untuk Deteksi Dini Kanker Payudara', author: 'Tim PANDU MAHARAJA', date: '15 Juni 2025', category: 'Kanker', image: 'https://placehold.co/600x400/ec4899/FFFFFF?text=SADARI', content: `<p class="mb-4">Kanker payudara adalah salah satu jenis kanker yang paling umum pada wanita, namun tingkat keberhasilan pengobatannya sangat tinggi jika ditemukan pada stadium awal. Di sinilah peran penting Pemeriksaan Payudara Sendiri (SADARI).</p><strong class="text-gray-900 text-lg block mb-2">Kapan Melakukan SADARI?</strong><p class="mb-4">Waktu terbaik adalah sekitar 7-10 hari setelah hari pertama menstruasi, saat payudara tidak terlalu tegang atau bengkak. Bagi wanita yang sudah menopause, pilihlah tanggal yang sama setiap bulannya untuk melakukannya.</p><strong class="text-gray-900 text-lg block mb-2">Apa yang Harus Diperhatikan?</strong><ul class="list-disc list-inside space-y-2 mb-4"><li>Adanya benjolan atau penebalan pada payudara atau area ketiak.</li><li>Perubahan ukuran, bentuk, atau kontur payudara.</li><li>Keluarnya cairan bening atau berdarah dari puting.</li><li>Kulit payudara yang mengerut atau tertarik ke dalam seperti lesung pipi.</li><li>Puting yang masuk ke dalam atau terasa nyeri.</li></ul><p>SADARI bukan untuk mendiagnosis, tetapi untuk mengenali tubuh Anda. Jika Anda menemukan salah satu dari perubahan ini, jangan panik, tetapi segeralah berkonsultasi dengan tenaga medis di Puskesmas untuk pemeriksaan lebih lanjut.</p>`},
+                { id: 4, title: 'Cegah Stroke Sejak Dini: Tips Gaya Hidup Sehat', author: 'Dr. Budi Santoso', date: '12 Juni 2025', category: 'Stroke', image: 'https://placehold.co/600x400/f59e0b/FFFFFF?text=Otak+Sehat', content: `<p class="mb-4">Stroke terjadi ketika pasokan darah ke otak terganggu. Meskipun terdengar menakutkan, hingga 80% kasus stroke dapat dicegah dengan mengendalikan faktor risikonya. Kuncinya ada pada gaya hidup Anda.</p><strong class="text-gray-900 text-lg block mb-2">Pilar Pencegahan Stroke:</strong><ul class="list-disc list-inside space-y-2 mb-4"><li><strong>Pola Makan Sehat Jantung:</strong> Fokus pada diet kaya serat dari buah, sayur, biji-bijian, dan protein tanpa lemak. Batasi lemak jenuh, lemak trans, dan kolesterol.</li><li><strong>Jaga Berat Badan Ideal:</strong> Obesitas meningkatkan risiko hipertensi, penyakit jantung, dan diabetes, yang semuanya merupakan faktor risiko utama stroke.</li><li><strong>Berhenti Merokok:</strong> Merokok merusak pembuluh darah dan mempercepat pembentukan sumbatan arteri. Berhenti merokok adalah satu-satunya hal terbaik yang bisa Anda lakukan untuk mencegah stroke.</li><li><strong>Batasi Konsumsi Alkohol:</strong> Konsumsi alkohol berlebihan dapat meningkatkan tekanan darah.</li><li><strong>Kendalikan Kondisi Medis:</strong> Pastikan tekanan darah tinggi, kolesterol tinggi, dan diabetes Anda terkontrol dengan baik melalui pengobatan dan gaya hidup sehat.</li></ul><p>Memulai perubahan kecil hari ini dapat memberikan perlindungan besar bagi kesehatan otak Anda di masa depan.</p>`},
+                { id: 5, title: 'Stres dan PTM: Hubungan Tak Terlihat yang Perlu Diwaspadai', author: 'Tim PANDU MAHARAJA', date: '10 Juni 2025', category: 'Kesehatan Mental', image: 'https://placehold.co/600x400/10b981/FFFFFF?text=Relaksasi', content: `<p class="mb-4">Kita semua mengalami stres, tetapi ketika stres menjadi kronis (berkepanjangan), dampaknya tidak hanya pada pikiran, tetapi juga pada tubuh. Stres kronis dapat berkontribusi secara signifikan terhadap perkembangan Penyakit Tidak Menular (PTM).</p><strong class="text-gray-900 text-lg block mb-2">Bagaimana Stres Mempengaruhi Tubuh?</strong><p class="mb-4">Saat stres, tubuh melepaskan hormon seperti kortisol dan adrenalin. Dalam jangka panjang, kadar hormon ini yang terus-menerus tinggi dapat menyebabkan:</p><ul class="list-disc list-inside space-y-2 mb-4"><li><strong>Peningkatan Tekanan Darah:</strong> Membebani jantung dan pembuluh darah.</li><li><strong>Peradangan (Inflamasi):</strong> Memicu kerusakan sel dan arteri.</li><li><strong>Peningkatan Gula Darah:</strong> Meningkatkan risiko resistensi insulin dan diabetes.</li><li><strong>Perilaku Tidak Sehat:</strong> Stres seringkali mendorong kita untuk makan berlebihan, merokok, atau kurang tidur, yang semuanya adalah faktor risiko PTM.</li></ul><p>Meluangkan waktu untuk relaksasi, seperti yoga, jalan-jalan di alam, mendengarkan musik, atau sekadar berbicara dengan teman, adalah bagian penting dari strategi pencegahan PTM. Jaga kesehatan mental Anda, maka fisik Anda akan mengikuti.</p>`}
+            ];
+
+            // --- ELEMENTS & RENDER FUNCTIONS ---
+            const blogHighlightContainer = document.getElementById('blog-highlight-container');
+            const blogListContainer = document.getElementById('blog-list-container');
+            const articleContentContainer = document.getElementById('article-content-container');
+            
+            function createBlogCard(post) { return `<div class="light-glass-card rounded-xl text-left overflow-hidden group blog-card-link cursor-pointer" data-id="${post.id}"><img src="${post.image}" alt="Gambar artikel tentang ${post.category}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"><div class="p-6"><span class="text-xs font-semibold text-blue-600 bg-blue-100 py-1 px-3 rounded-full">${post.category}</span><h3 class="font-bold text-xl my-3 text-gray-900">${post.title}</h3><div class="text-sm text-gray-500 flex items-center"><span>${post.author}</span><span class="mx-2">•</span><span>${post.date}</span></div></div></div>`; }
+            function renderBlogHighlights() { if(blogHighlightContainer) blogHighlightContainer.innerHTML = blogPosts.slice(0, 3).map(createBlogCard).join('');}
+            function renderBlogList() { if(blogListContainer) blogListContainer.innerHTML = blogPosts.map(createBlogCard).join(''); }
+            function renderArticleDetail(postId) {
+                const post = blogPosts.find(p => p.id == postId);
+                if (!post) return;
+                articleContentContainer.innerHTML = `<div class="mb-8"><a href="#" class="nav-link text-blue-500 hover:underline" data-page="blog-list-page">&larr; Kembali ke semua artikel</a></div><h1 class="text-4xl md:text-5xl font-bold mb-4 section-title">${post.title}</h1><div class="text-sm text-gray-500 flex items-center mb-6"><span>Oleh: ${post.author}</span><span class="mx-2">•</span><span>${post.date}</span><span class="mx-2">•</span><span class="text-xs font-semibold text-blue-600 bg-blue-100 py-1 px-3 rounded-full">${post.category}</span></div><img src="${post.image}" alt="${post.title}" class="w-full h-auto max-h-96 object-cover rounded-xl mb-8"><div class="prose max-w-none text-gray-700 text-lg leading-relaxed">${post.content}</div>`;
             }
-        }
-        
-        // --- Show/Hide Nav on Scroll (for Home page) ---
-        let lastScrollTop = 0;
-        window.addEventListener("scroll", function() {
-            const homePage = document.getElementById('home');
-            if (!homePage.classList.contains('active')) {
-                return; // Only apply this logic on the home page
+
+            // --- PAGE & NAVIGATION ---
+            const pages = document.querySelectorAll('.page');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const allNavLinks = document.querySelectorAll('header .nav-link');
+            const artikelNavLink = document.querySelector('header .nav-link[data-page="blog-list-page"]');
+            
+            const scrollSpyHandler = () => {
+                const activePage = document.querySelector('.page.active');
+                if (!activePage || activePage.id !== 'main-page') return;
+                let currentSectionId = '';
+                const sections = document.querySelectorAll('#main-page section[id]');
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (window.scrollY >= sectionTop - 150) { 
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                allNavLinks.forEach(link => {
+                     if (link.dataset.section === 'artikel') {
+                        link.classList.toggle('active', currentSectionId === 'artikel');
+                    } else if (link.dataset.page !== 'blog-list-page') {
+                        link.classList.toggle('active', link.dataset.section === currentSectionId);
+                    }
+                });
+            };
+
+            function showPage(pageId) {
+                pages.forEach(page => page.classList.toggle('active', page.id === pageId));
+                allNavLinks.forEach(link => link.classList.remove('active'));
+                if (pageId === 'blog-list-page' || pageId === 'article-detail-page') {
+                    if(artikelNavLink) artikelNavLink.classList.add('active');
+                } else if (pageId === 'main-page') {
+                    setTimeout(scrollSpyHandler, 100); 
+                }
+                window.scrollTo(0, 0);
             }
             
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const nav = document.getElementById('main-nav');
+            document.body.addEventListener('click', function(e) {
+                const navLink = e.target.closest('.nav-link');
+                const blogCard = e.target.closest('.blog-card-link');
+                if (navLink) { 
+                    e.preventDefault(); 
+                    const pageId = navLink.dataset.page; 
+                    if (pageId === 'main-page' && navLink.hash) { 
+                        const headerHeight = document.getElementById('sticky-header-container').offsetHeight;
+                        const targetSection = document.querySelector(navLink.hash);
+                        if(targetSection) {
+                             const elementPosition = targetSection.getBoundingClientRect().top;
+                             const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+                             window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                        }
+                    } else {
+                        showPage(pageId);
+                    }
+                    mobileMenu.classList.add('hidden'); 
+                }
+                if (blogCard) { const postId = blogCard.dataset.id; renderArticleDetail(postId); showPage('article-detail-page'); }
+            });
 
-            if (scrollTop > 200) { // Show nav if scrolled down
-                nav.style.top = "0";
-            } else { // Hide nav if at top
-                nav.style.top = "-100px";
+            // --- ANIMATION & OTHER ---
+            const animatedTitle = document.getElementById('animated-title');
+            if (animatedTitle) {
+                const textToType = 'Selamat Datang di PANDU MAHARAJA';
+                let charIndex = 0;
+                function typeWriter() {
+                    if (charIndex < textToType.length) {
+                        animatedTitle.classList.remove('typing-done');
+                        animatedTitle.textContent += textToType.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeWriter, 90);
+                    } else {
+                        animatedTitle.classList.add('typing-done');
+                        setTimeout(() => {
+                            charIndex = 0;
+                            animatedTitle.textContent = '';
+                            typeWriter();
+                        }, 2000);
+                    }
+                }
+                typeWriter();
             }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, false);
 
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        // --- Particles.js Configuration ---
-        particlesJS("particles-js", {
-            "particles": { "number": { "value": 50, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#3b82f6" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } }, "size": { "value": 2, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#4b5563", "opacity": 0.3, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.7 } }, "push": { "particles_nb": 4 } } }, "retina_detect": true
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            const closeBtn = document.getElementById('modal-close');
+            document.body.addEventListener('click', (e) => { if (e.target.classList.contains('gallery-image')) { modal.classList.remove('hidden'); modalImg.src = e.target.src; }});
+            const closeModal = () => modal.classList.add('hidden');
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => e.target === modal && closeModal());
+
+            const toTopBtn = document.getElementById('scroll-to-top-btn');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { toTopBtn.classList.remove('opacity-0', 'invisible'); } else { toTopBtn.classList.add('opacity-0', 'invisible'); }
+            });
+            toTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); scrollObserver.unobserve(entry.target); }});
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.scroll-animate').forEach(el => { scrollObserver.observe(el); });
+            
+            window.addEventListener('scroll', scrollSpyHandler);
+            
+            // --- INITIALIZATION ---
+            renderBlogHighlights();
+            renderBlogList();
+            showPage('main-page');
         });
     </script>
 </body>
