@@ -10,7 +10,7 @@
        2. Unggah gambar tersebut ke server website Anda.
        3. Ganti 'https://placehold.co/32x32/8b5cf6/FFFFFF?text=P' di bawah ini dengan path ke file logo Anda, misal 'images/favicon.png'.
     -->
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" type="image/png" href="https://placehold.co/32x32/8b5cf6/FFFFFF?text=P">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,7 +163,7 @@
             <header class="bg-white/80 backdrop-blur-md border-b border-gray-200">
                 <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
                     <a href="#" class="nav-link" data-page="main-page" data-section="hero">
-                        <img src="logolengkap.png" alt="Logo PANDU MAHARAJA" class="h-11 w-auto">
+                        <img src="https://placehold.co/150x40/1f2937/ffffff?text=PANDU+MAHARAJA" alt="Logo PANDU MAHARAJA" class="h-10 w-auto">
                     </a>
                     <div id="main-nav" class="hidden md:flex space-x-8 items-center text-gray-600">
                         <a href="#hero" class="nav-link hover:text-blue-500" data-page="main-page" data-section="hero">Home</a>
@@ -212,7 +212,7 @@
                         </div>
 
                         <p class="mb-10 max-w-3xl mx-auto text-gray-600">Inovasi kesehatan modern dari <span class="stabilo font-semibold">UPT Puskesmas Trajeng</span> untuk masa depan Anda yang lebih sehat.</p>
-                        <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="text-white font-bold text-lg px-10 py-4 rounded-full primary-button">Mulai Skrining Sekarang</a>
+                        <a href="http://bit.ly/reservasipandumaharaja" target="_blank" class="text-white font-bold text-lg px-10 py-5 rounded-full primary-button">Mulai Skrining Sekarang</a>
                     </div>
                 </section>
 
@@ -297,11 +297,13 @@
                 <section id="galeri" class="scroll-animate py-20 bg-white">
                     <div class="container mx-auto px-6">
                         <h2 class="text-3xl font-bold text-center mb-16 section-title">Dokumentasi Kegiatan</h2>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="1.png" alt="Dokumentasi Kegiatan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
-                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="2.png" alt="Dokumentasi Kegiatan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
-                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="3.png" alt="Dokumentasi Kegiatan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
-                            <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="4.png" alt="Dokumentasi Kegiatan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                        <div class="max-w-5xl mx-auto">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="1.png" alt="Pemeriksaan EKG" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                                <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="2.png" alt="Konsultasi Pasien" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                                <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="3.png" alt="Skrining Karyawan" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                                <div class="group"><div class="overflow-hidden rounded-lg glow-border"><img src="4.png" alt="Penyuluhan Warga" class="gallery-image w-full h-auto object-cover aspect-square cursor-pointer transition-transform duration-300 group-hover:scale-110"></div></div>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -384,28 +386,7 @@
             const mobileMenu = document.getElementById('mobile-menu');
             const allNavLinks = document.querySelectorAll('header .nav-link');
             const artikelNavLink = document.querySelector('header .nav-link[data-page="blog-list-page"]');
-            
-            const scrollSpyHandler = () => {
-                const activePage = document.querySelector('.page.active');
-                if (!activePage || activePage.id !== 'main-page') return;
-                let currentSectionId = '';
-                const sections = document.querySelectorAll('#main-page section[id]');
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const headerHeight = document.getElementById('sticky-header-container').offsetHeight;
-                    if (window.scrollY >= sectionTop - headerHeight - 1) { 
-                        currentSectionId = section.getAttribute('id');
-                    }
-                });
-                
-                allNavLinks.forEach(link => {
-                     if (link.dataset.section === 'artikel') {
-                        link.classList.toggle('active', currentSectionId === 'artikel');
-                    } else if (link.dataset.page !== 'blog-list-page') {
-                        link.classList.toggle('active', link.dataset.section === currentSectionId);
-                    }
-                });
-            };
+            let scrollSpyHandler;
 
             function showPage(pageId) {
                 pages.forEach(page => page.classList.toggle('active', page.id === pageId));
@@ -413,7 +394,7 @@
                 if (pageId === 'blog-list-page' || pageId === 'article-detail-page') {
                     if(artikelNavLink) artikelNavLink.classList.add('active');
                 } else if (pageId === 'main-page') {
-                    setTimeout(scrollSpyHandler, 100); 
+                    if(scrollSpyHandler) setTimeout(scrollSpyHandler, 100); 
                 }
                 window.scrollTo(0, 0);
             }
@@ -485,6 +466,28 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.scroll-animate').forEach(el => { scrollObserver.observe(el); });
             
+            // --- Scroll Spy Handler ---
+            const sections = document.querySelectorAll('#main-page section[id]');
+            scrollSpyHandler = () => {
+                const activePage = document.querySelector('.page.active');
+                if (!activePage || activePage.id !== 'main-page') return;
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const headerHeight = document.getElementById('sticky-header-container').offsetHeight;
+                    if (window.scrollY >= sectionTop - headerHeight - 1) { 
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+                
+                allNavLinks.forEach(link => {
+                     if (link.dataset.section === 'artikel') {
+                        link.classList.toggle('active', currentSectionId === 'artikel');
+                    } else if (link.dataset.page !== 'blog-list-page') {
+                        link.classList.toggle('active', link.dataset.section === currentSectionId);
+                    }
+                });
+            };
             window.addEventListener('scroll', scrollSpyHandler);
             
             // --- INITIALIZATION ---
@@ -574,4 +577,4 @@
         });
     </script>
 </body>
-</html>
+</ht
